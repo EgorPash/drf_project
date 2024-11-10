@@ -38,3 +38,14 @@ services:
       - redis
     env_file:
       - .env
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A my_project beat --loglevel=info
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
